@@ -1,0 +1,50 @@
+# globalmind-io/chatbot
+index.js:
+const express = require('express');
+const app = express();
+const dialogflow = require('@google-cloud/dialogflow');
+
+// Initialize Dialogflow client
+const client = new dialogflow.SessionsClient();
+
+// Define chatbot intents and responses
+const intents = [
+  {
+    intent: 'hello',
+    response: 'Hello! How can I assist you today?'
+  },
+  {
+    intent: 'global-challenges',
+    response: 'Here are some global challenges we can tackle together: climate change, social inequality, access to education and healthcare...'
+  }
+];
+
+// Handle chatbot requests
+app.post('/chat', (req, res) => {
+  const { query } = req.body;
+  const session = client.sessionPath('globalmind-io', '1234567890');
+  const request = {
+    session,
+    queryInput: {
+      text: {
+        text: query,
+        languageCode: 'en-US'
+      }
+    }
+  };
+
+  client.detectIntent(request)
+    .then(response => {
+      const intent = response.queryResult.intent;
+      const responseText = intents.find(i => i.intent === intent).response;
+      res.json({ response: responseText });
+    })
+    .catch(err => {
+      console.error(err);
+      res.status(500).json({ error: 'Error processing chat request' });
+    });
+});
+
+app.listen(3000, () => {
+  console.log('Chatbot listening on port 3000');
+});
