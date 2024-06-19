@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: globalmind-io
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: globalmind-io
+  template:
+    metadata:
+      labels:
+        app: globalmind-io
+    spec:
+      containers:
+      - name: globalmind-io
+        image: globalmind-io:latest
+        ports:
+        - containerPort: 80
