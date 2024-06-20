@@ -1,0 +1,37 @@
+// AnalyticsJob.java (compiled to analytics.jar)
+import org.apache.flink.api.common.functions.MapFunction;
+import org.apache.flink.api.common.functions.ReduceFunction;
+import org.apache.flink.api.java.DataSet;
+import org.apache.flink.api.java.ExecutionEnvironment;
+import org.apache.flink.api.java.tuple.Tuple2;
+
+public class AnalyticsJob {
+    public static void main(String[] args) throws Exception {
+        ExecutionEnvironment env = ExecutionEnvironment.getExecutionEnvironment();
+
+        // Read events from Kafka topic
+        DataSet<Event> events = env.addSource(new FlinkKafkaConsumer<>("globalmind_events", new EventDeserializer(), props));
+
+        // Process events
+        DataSet<Tuple2<String, Long>> userInteractions = events
+               .filter(event -> event.getEventType().equals("user_interaction"))
+               .map(new MapFunction<Event, Tuple2<String, Long>>() {
+                    @Override
+                    public Tuple2<String, Long> map(Event event) throws Exception {
+                        return new Tuple2<>(event.getUserId(), 1L);
+                    }
+                })
+               .groupBy(0)
+               .reduce(new ReduceFunction<Tuple2<String, Long>>() {
+                    @Override
+                    public Tuple2<String, Long> reduce(Tuple2<String, Long> value1, Tuple2<String, Long> value2) throws Exception {
+                        return new Tuple2<>(value1.f0, value1.f1 + value2.f1);
+                    }
+                });
+
+        // Write results to Kafka topic
+        userInteractions.addSink(new FlinkKafkaProducer<>("globalmind_analytics", new Tuple2Serializer(), props));
+
+        env.execute("Analytics Job");
+    }
+}
