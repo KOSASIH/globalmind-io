@@ -1,0 +1,74 @@
+{
+  "intents": [
+    {
+      "name": "greet",
+      "description": "User greets the AI",
+      "examples": [
+        "Hi",
+        "Hello",
+        "Hey",
+        "Hi there",
+        "Greetings"
+      ],
+      "slots": [
+        {
+          "name": "name",
+          "type": "string",
+          "required": false
+        }
+      ],
+      "responses": ["greet_response"]
+    },
+    {
+      "name": "ask_question",
+      "description": "User asks a question",
+      "examples": [
+        "What is your purpose?",
+        "Can you help me?",
+        "How do you work?"
+      ],
+      "slots": [
+        {
+          "name": "question",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "responses": ["answer_question"]
+    },
+    {
+      "name": "provide_info",
+      "description": "User provides information",
+      "examples": [
+        "My name is John",
+        "I'm from New York",
+        "I'm interested in AI"
+      ],
+      "slots": [
+        {
+          "name": "info",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "responses": ["acknowledge_info"]
+    },
+    {
+      "name": "request_task",
+      "description": "User requests a task",
+      "examples": [
+        "Can you summarize this article?",
+        "Can you generate a poem?",
+        "Can you solve this math problem?"
+      ],
+      "slots": [
+        {
+          "name": "task",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "responses": ["perform_task"]
+    }
+  ]
+        }
