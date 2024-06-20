@@ -1,0 +1,39 @@
+{
+  "entities": [
+    {
+      "name": "name",
+      "type": "string",
+      "description": "User's name"
+    },
+    {
+      "name": "question",
+      "type": "string",
+      "description": "User's question"
+    },
+    {
+      "name": "info",
+      "type": "string",
+      "description": "User-provided information"
+    },
+    {
+      "name": "task",
+      "type": "string",
+      "description": "User-requested task"
+    },
+    {
+      "name": "article",
+      "type": "string",
+      "description": "Article text"
+    },
+    {
+      "name": "poem",
+      "type": "string",
+      "description": "Poem text"
+    },
+    {
+      "name": "math_problem",
+      "type": "string",
+      "description": "Math problem"
+    }
+  ]
+}
