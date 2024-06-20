@@ -1,0 +1,28 @@
+{
+  "events": [
+    {
+      "name": "user_interaction",
+      "description": "User interaction event",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "user_id": {"type": "string"},
+          "event_type": {"type": "string"},
+          "timestamp": {"type": "long"}
+        }
+      }
+    },
+    {
+      "name": "system_alert",
+      "description": "System alert event",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "alert_type": {"type": "string"},
+          "message": {"type": "string"},
+          "timestamp": {"type": "long"}
+        }
+      }
+    }
+  ]
+}
