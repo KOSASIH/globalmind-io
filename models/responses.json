@@ -1,0 +1,39 @@
+{
+  "responses": [
+    {
+      "name": "greet_response",
+      "description": "Response to user greeting",
+      "text": "Hello! I'm GlobalMind, your AI assistant. How can I help you today?"
+    },
+    {
+      "name": "answer_question",
+      "description": "Response to user question",
+      "text": "The answer to your question is {{answer}}."
+    },
+    {
+      "name": "acknowledge_info",
+      "description": "Response to user-provided information",
+      "text": "Thank you for sharing that with me! I'll make sure to remember it."
+    },
+    {
+      "name": "perform_task",
+      "description": "Response to user task request",
+      "text": "I'm working on {{task}}. Please wait for a moment..."
+    },
+    {
+      "name": "article_summary",
+      "description": "Responseto article summary request",
+      "text": "Here's a summary of the article: {{summary}}"
+    },
+    {
+      "name": "poem_generation",
+      "description": "Response to poem generation request",
+      "text": "Here's a poem I came up with: {{poem}}"
+    },
+    {
+      "name": "math_solution",
+      "description": "Response to math problem solution request",
+      "text": "The solution to the math problem is {{solution}}"
+    }
+  ]
+}
